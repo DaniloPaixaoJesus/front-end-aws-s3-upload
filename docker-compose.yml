@@ -12,18 +12,6 @@ services:
       - USE_LOCALSTACK=true
     volumes:
       - ./env-config-generator.sh:/docker-entrypoint.d/env-config-generator.sh:ro
-    depends_on:
-      - localstack
-    networks:
-      - localstack_network
-
-  localstack:
-    image: localstack/localstack
-    ports:
-      - "4566:4566"
-    environment:
-      - SERVICES=s3
-      - DEBUG=1
     networks:
       - localstack_network
 
