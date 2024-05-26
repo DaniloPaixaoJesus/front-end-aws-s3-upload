@@ -6,8 +6,27 @@ services:
       - "80:80"
     environment:
       - AWS_REGION=us-east-1
-      - AWS_IDENTITY_POOL_ID=YOUR_IDENTITY_POOL_ID
-      - S3_BUCKET_NAME=transcription-bucket
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - S3_BUCKET_NAME=app-transcription-bucket
       - USE_LOCALSTACK=true
     volumes:
       - ./env-config-generator.sh:/docker-entrypoint.d/env-config-generator.sh:ro
+    depends_on:
+      - localstack
+    networks:
+      - localstack_network
+
+  localstack:
+    image: localstack/localstack
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=s3
+      - DEBUG=1
+    networks:
+      - localstack_network
+
+networks:
+  localstack_network:
+    driver: bridge
