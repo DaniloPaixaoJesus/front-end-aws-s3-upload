@@ -48,7 +48,7 @@ getEnvConfig().then(config => {
         const fileNameWithUuid = `${uuid}-${file.name}`;
 
         const params = {
-            Key: `video-download-from-front-end2/${fileNameWithUuid}`,
+            Key: `video-download-from-front-end/${fileNameWithUuid}`,
             Body: file
         };
 
